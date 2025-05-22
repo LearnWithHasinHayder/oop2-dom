@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Emoji</title>
+    <style>
+        body {
+            overflow: hidden;
+        }
+
+        .redtext {
+            color: red
+        }
+
+        .emoji {
+            position: absolute;
+            font-size: 24px;
+            animation: fall 2s linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                top: -50px;
+            }
+
+            100% {
+                top: 100vh;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        // const div = document.createElement('div')
+        // div.innerText = Math.random()
+        // // div.style.color = 'red'
+        // // div.classList.add('emoji')
+        // div.style.fontSize = '32px'
+        // document.body.appendChild(div)
+        setInterval(() => {
+            const div = document.createElement('div')
+            div.innerText = "-|-"
+            div.style.left = Math.random() * 100 + "%"
+            div.classList.add('emoji')
+            document.body.appendChild(div)
+            setTimeout(() => {
+                div.remove()
+            }, 2000)
+        }, 200)
+    </script>
+
+</body>
+
+</html>

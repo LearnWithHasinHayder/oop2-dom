@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minimal Hero Page</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body,
+        html {
+            height: 100%;
+            font-family: sans-serif;
+        }
+
+        .top-bar {
+            width: 100%;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            background-color: black;
+            color: white;
+        }
+
+        .hero {
+            height: calc(100vh - 50px);
+            /* account for top bar height */
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .hero img {
+            max-width: 300px;
+            height: auto;
+            margin: 20px 0;
+        }
+
+        .hero-buttons {
+            margin-top: 20px;
+        }
+
+        .hero-buttons button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        #hero-heading,
+        #hero-text {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-bar" id="top-bar">This is a top admin bar</div>
+
+    <section class="hero" id="hero">
+        <h1 id="hero-heading">Welcome to My Website</h1>
+        <p id="hero-text">This is a simple full-page hero section built with plain HTML, CSS, and JS.</p>
+        <div class="hero-buttons">
+            <button onClick="changeTheme(sunsetTheme)">Change to Sunset</button>
+            <button onClick="changeTheme(forestTheme)">Change to Forest</button>
+            <button onClick="changeTheme(lavenderTheme)">Change to Lavender</button>
+            <button onClick="changeTheme(darkTheme)">Change to Dark</button>
+        </div>
+    </section>
+
+    <script>
+        const hero = document.getElementById('hero');
+        const topBar = document.getElementById('top-bar');
+        const heading = document.getElementById('hero-heading');
+        const paragraph = document.getElementById('hero-text');
+        const buttons = document.querySelectorAll('.hero-buttons button');
+
+        const sunsetTheme = {
+            bgcolor: "#FF6B6B",
+            textcolor: "#FFE66D",
+            buttoncolor: "#FFD93D",
+            buttontextcolor: "#6B0504",
+            topbarbg: "#6B0504",
+            topbartext: "#FFE66D"
+        };
+
+        const lightTheme = {
+            bgcolor: "#FFFFFF",
+            textcolor: "#1F2937",
+            buttoncolor: "#E5E7EB",
+            buttontextcolor: "#111827",
+            topbarbg: "#F3F4F6",
+            topbartext: "#111827"
+        };
+
+        const darkTheme = {
+            bgcolor: "#111827",
+            textcolor: "#F9FAFB",
+            buttoncolor: "#2563EB",
+            buttontextcolor: "#FFFFFF",
+            topbarbg: "#1F2937",
+            topbartext: "#E5E7EB"
+        };
+
+        const forestTheme = {
+            bgcolor: "#1B4332",
+            textcolor: "#D8F3DC",
+            buttoncolor: "#40916C",
+            buttontextcolor: "#FFFFFF",
+            topbarbg: "#081C15",
+            topbartext: "#D8F3DC"
+        };
+
+        const iceBlueTheme = {
+            bgcolor: "#E0F7FA",
+            textcolor: "#006064",
+            buttoncolor: "#00BCD4",
+            buttontextcolor: "#FFFFFF",
+            topbarbg: "#B2EBF2",
+            topbartext: "#004D40"
+        };
+
+        const lavenderTheme = {
+            bgcolor: "#EDE9FE",
+            textcolor: "#4C1D95",
+            buttoncolor: "#A78BFA",
+            buttontextcolor: "#FFFFFF",
+            topbarbg: "#C4B5FD",
+            topbartext: "#4C1D95"
+        };
+
+        class ThemeChanger {
+            static applyTheme(theme) {
+                hero.style.backgroundColor = theme.bgcolor
+                heading.style.color = theme.textcolor
+                paragraph.style.color = theme.textcolor
+                buttons.forEach(button => {
+                    button.style.backgroundColor = theme.buttoncolor
+                    button.style.color = theme.buttontextcolor
+                })
+                topBar.style.backgroundColor = theme.topbarbg
+                topBar.style.color = theme.topbartext
+            }
+        }
+
+        function changeTheme(theme) {
+            ThemeChanger.applyTheme(theme)
+            // const tc = new ThemeChanger()
+            // tc.applyTheme(theme)
+        }
+
+
+    </script>
+</body>
+
+</html>

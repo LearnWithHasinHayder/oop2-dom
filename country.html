@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Country Info with DOM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 p-6 font-sans">
+    <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Select a Country</h2>
+        <select id="countrySelect" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">-- Choose a country --</option>
+        </select>
+
+        <div id="info" class="mt-6 bg-gray-50 rounded-md p-4 border border-gray-200 hidden">
+            <h3 id="countryName" class="text-xl font-bold text-gray-800 mb-3"></h3>
+            <div class="space-y-2 mb-4">
+                <p><span class="font-semibold">Capital:</span> <span id="capital"></span></p>
+                <p><span class="font-semibold">Region:</span> <span id="region"></span></p>
+                <p><span class="font-semibold">Population:</span> <span id="population"></span></p>
+            </div>
+            <img id="flagImg" class="w-24 h-auto border border-gray-300 shadow-sm" src="" alt="Country Flag" />
+        </div>
+    </div>
+
+    <script>
+        const select = document.getElementById('countrySelect');
+        const infoDiv = document.getElementById('info');
+
+        const countryName = document.getElementById('countryName');
+        const capital = document.getElementById('capital');
+        const region = document.getElementById('region');
+        const population = document.getElementById('population');
+        const flagImg = document.getElementById('flagImg');
+
+        let countriesData = [];
+
+        async function loadCountries() {
+            const response = await fetch('https://restcountries.com/v3.1/all')
+            const data = await response.json()
+            countriesData = data
+
+            countriesData.forEach(country => {
+                const option = document.createElement('option')
+                option.value = country.cca2
+                option.innerText = country.name.common
+                select.appendChild(option);
+            })
+        }
+
+        select.addEventListener('change', () => {
+            const selectedCode = select.value
+            const country = countriesData.find(c => c.cca2 == selectedCode)
+            if (country) {
+                infoDiv.classList.remove('hidden')
+                countryName.innerText = country.name.common
+                capital.textContent = country.capital[0]
+                region.textContent = country.region
+                population.textContent = country.population.toLocaleString()
+                flagImg.src = country.flags.png
+                flagImg.setAttribute('alt', country.name.common)
+            } else {
+                infoDiv.classList.add('hidden')
+            }
+        })
+
+        // select.addEventListener('change', function () {
+
+        // });
+
+        loadCountries();
+    </script>
+</body>
+
+</html>
